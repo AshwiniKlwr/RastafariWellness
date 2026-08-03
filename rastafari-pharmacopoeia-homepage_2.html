@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rastafari Wellness — Pharmacopoeia Direction (Brand-Bridged)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Spectral:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --paper-2:#F5F4F0;
+    --ink:#17140D;
+    --ink-soft:#5A5040;
+    --green:#028144;
+    --red:#C61F25;
+    --gold:#FDE503;
+    --ring:#C9A227;
+    --line:#E4E1D8;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'Spectral',serif; font-size:16px; line-height:1.6; }
+  h1,h2,h3,h4{ font-family:'Fraunces',serif; font-weight:600; margin:0; color:var(--ink); }
+  em{ font-style:italic; color:var(--green); }
+  a{ color:inherit; text-decoration:none; }
+  img,svg{ max-width:100%; display:block; }
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 28px; }
+  .mono{ font-family:'Fragment Mono',monospace; }
+  .eyebrow{ font-family:'Fragment Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--red); }
+  .rule{ height:1px; background:var(--line); border:none; margin:0; }
+
+  /* signature ribbon rule — bridged tri-color, thinner & fewer colors than the reference deck */
+  .ribbon{ height:6px; display:flex; }
+  .ribbon span{ flex:1 1 18px; max-width:18px; }
+  .ribbon .r{ background:var(--red); } .ribbon .g{ background:var(--gold); } .ribbon .e{ background:var(--green); }
+
+  button,.btn{ cursor:pointer; font-family:'Fragment Mono',monospace; font-weight:500; font-size:12.5px; letter-spacing:.03em; text-transform:uppercase; border-radius:var(--radius); border:1px solid var(--ink); padding:13px 22px; display:inline-flex; align-items:center; gap:8px; transition:.15s ease; }
+  .btn-primary{ background:var(--red); color:var(--paper); border-color:var(--red); }
+  .btn-primary:hover{ background:#9E191E; }
+  .btn-ghost{ background:transparent; color:var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--red); outline-offset:2px; }
+
+  header.main{ background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50; }
+  header.main .wrap{ display:flex; align-items:center; justify-content:space-between; padding:16px 28px; }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand img{ width:32px; height:32px; border-radius:50%; }
+  .brand span{ font-family:'Fraunces',serif; font-weight:600; font-size:16px; letter-spacing:.01em; }
+  nav.primary{ display:flex; gap:26px; }
+  nav.primary a{ font-family:'Fragment Mono',monospace; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); padding:6px 0; border-bottom:2px solid transparent; }
+  nav.primary a:hover,.active{ color:var(--ink); border-color:var(--red); }
+  .header-actions{ display:flex; align-items:center; gap:14px; }
+  .mobile-toggle{ display:none; background:none; border:none; padding:8px; }
+  .mobile-panel{ display:none; position:absolute; left:0; right:0; top:100%; background:var(--paper); border-bottom:1px solid var(--line); flex-direction:column; padding:6px 28px 18px; }
+  .mobile-panel.open{ display:flex; }
+  .mobile-panel a{ padding:12px 0; font-family:'Fragment Mono',monospace; font-size:13px; text-transform:uppercase; border-bottom:1px solid var(--line); }
+  @media (max-width:900px){ nav.primary{ display:none; } .mobile-toggle{ display:flex; } }
+
+  /* hero */
+  .hero{ padding:64px 0 0; }
+  .hero-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding-bottom:44px; }
+  .hero h1{ font-size:clamp(32px,4.2vw,50px); line-height:1.1; margin:16px 0 20px; max-width:12ch; }
+  .hero p.lede{ color:var(--ink-soft); max-width:44ch; margin-bottom:28px; font-size:16.5px; }
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; }
+
+  .plate-frame{ border:1px solid var(--ring); padding:26px; background:var(--paper-2); position:relative; }
+  .plate-frame .cap{ display:flex; justify-content:space-between; font-family:'Fragment Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:16px; }
+  .plate-circle{ border:1px solid var(--green); border-radius:50%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; padding:22px; }
+  .plate-circle svg{ width:70%; }
+  .plate-caption{ text-align:center; font-size:12.5px; color:var(--ink-soft); margin-top:14px; font-style:italic; }
+
+  .trust-strip{ background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .trust-strip .wrap{ display:grid; grid-template-columns:repeat(5,1fr); padding:20px 28px; }
+  .trust-strip .stat{ text-align:center; border-right:1px solid var(--line); padding:0 8px; }
+  .trust-strip .stat:last-child{ border-right:none; }
+  .trust-strip .stat b{ font-family:'Fraunces',serif; font-size:19px; color:var(--red); display:block; }
+  .trust-strip .stat span{ font-family:'Fragment Mono',monospace; font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } .trust-strip .wrap{ grid-template-columns:repeat(2,1fr); gap:16px 0; } .trust-strip .stat{ border-right:none; } }
+  @media (max-width:640px){ .cta-row{ flex-direction:column; align-items:stretch; } .cta-row .btn{ justify-content:center; } }
+
+  section{ padding:70px 0; }
+  .section-head{ max-width:620px; margin-bottom:36px; }
+  .section-head h2{ font-size:clamp(24px,2.8vw,32px); margin:12px 0 10px; }
+  .section-head p{ color:var(--ink-soft); font-size:15.5px; }
+
+  /* physicians — the one reversed dark panel, per the reference deck's "/doctors" ledger */
+  .physicians{ background:var(--ink); color:var(--paper); }
+  .physicians .eyebrow{ color:var(--gold); }
+  .physicians .section-head h2{ color:var(--paper); }
+  .physicians .section-head p{ color:#C7BEA6; }
+  .physicians .license-line{ font-family:'Fragment Mono',monospace; font-size:11.5px; color:#C7BEA6; letter-spacing:.03em; margin-bottom:34px; padding-bottom:20px; border-bottom:1px solid #45402F; }
+  .doctor-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:#45402F; border:1px solid #45402F; }
+  .doctor-card{ background:var(--ink); padding:20px 14px; text-align:center; }
+  .doctor-card img{ width:64px; height:64px; border-radius:50%; object-fit:cover; margin:0 auto 12px; filter:grayscale(.15); }
+  .doctor-card b{ font-family:'Fraunces',serif; font-size:14px; display:block; color:var(--paper); }
+  .doctor-card .rx{ font-family:'Fragment Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin-top:6px; display:block; }
+
+  /* materia medica / products */
+  .materia{ background:var(--paper); }
+  .product-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .product-card{ border:1px solid var(--line); background:var(--paper-2); padding:0; display:flex; flex-direction:column; }
+  .product-card .plate{ aspect-ratio:1/1; background:var(--paper); border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:center; }
+  .product-card .plate img{ max-width:72%; max-height:72%; }
+  .product-card .info{ padding:16px 16px 18px; }
+  .product-card h4{ font-size:15px; margin-bottom:8px; }
+  .dose-row{ display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .dose-dots{ display:flex; gap:3px; }
+  .dose-dots span{ width:6px; height:6px; border-radius:50%; background:var(--line); }
+  .dose-dots span.on{ background:var(--red); }
+  .dose-label{ font-family:'Fragment Mono',monospace; font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em; }
+  .price-row{ display:flex; justify-content:space-between; align-items:center; font-family:'Fragment Mono',monospace; font-size:13px; }
+  .price-row .add{ color:var(--green); font-weight:500; }
+  @media (max-width:960px){ .product-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .product-grid{ grid-template-columns:1fr; } }
+
+  /* legality panel */
+  .legality{ background:var(--paper-2); }
+  .legality-box{ border:1px solid var(--ink); padding:30px 32px; }
+  .legality-box h3{ font-size:20px; margin-bottom:14px; }
+  .legality-box p{ color:var(--ink-soft); font-size:15px; margin:0; }
+  .legality-box .license-tag{ display:inline-flex; align-items:center; gap:8px; font-family:'Fragment Mono',monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; border:1px dashed var(--green); color:var(--green); padding:6px 12px; margin-top:18px; }
+
+  /* process */
+  .process-steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--line); }
+  .step{ padding:26px 24px; border-right:1px solid var(--line); }
+  .step:last-child{ border-right:none; }
+  .step .num{ font-family:'Fragment Mono',monospace; font-size:12px; color:var(--red); display:block; margin-bottom:10px; }
+  .step h4{ font-size:16px; margin-bottom:8px; }
+  .step p{ font-size:14px; color:var(--ink-soft); margin:0; }
+  @media (max-width:800px){ .process-steps{ grid-template-columns:1fr; } .step{ border-right:none; border-bottom:1px solid var(--line); } .step:last-child{ border-bottom:none; } }
+
+  /* journal */
+  .journal-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .journal-card{ border:1px solid var(--line); background:var(--paper-2); }
+  .journal-card img{ aspect-ratio:16/10; object-fit:cover; filter:sepia(.12); }
+  .journal-card .body{ padding:16px 16px 20px; }
+  .journal-card h4{ font-size:15.5px; line-height:1.35; margin-bottom:8px; }
+  .journal-card .read{ font-family:'Fragment Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--red); }
+  @media (max-width:900px){ .journal-grid{ grid-template-columns:1fr; } }
+
+  footer{ background:var(--ink); color:#C7BEA6; }
+  .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:32px; padding:50px 0 34px; }
+  footer h5{ color:var(--gold); font-family:'Fragment Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px; font-weight:500; }
+  footer span.brand-name{ color:var(--paper); font-family:'Fraunces',serif; }
+  footer p.tag{ font-size:13.5px; margin-top:12px; max-width:32ch; }
+  footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px; font-size:13px; }
+  footer ul a:hover{ color:var(--gold); }
+  .stamp{ width:74px; height:74px; border:1px solid var(--ring); border-radius:50%; display:flex; align-items:center; justify-content:center; text-align:center; flex-direction:column; font-family:'Fragment Mono',monospace; color:var(--ring); font-size:8px; letter-spacing:.05em; line-height:1.4; }
+  .stamp b{ font-size:10px; display:block; }
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; padding:20px 28px; border-top:1px solid #45402F; font-family:'Fragment Mono',monospace; font-size:11px; flex-wrap:wrap; gap:10px; }
+  @media (max-width:860px){ .footer-grid{ grid-template-columns:1fr 1fr; padding-left:28px; padding-right:28px; } }
+
+  .whatsapp-fab{ position:fixed; bottom:22px; right:22px; z-index:60; background:var(--green); color:var(--paper); width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:1px solid var(--gold); box-shadow:0 8px 18px rgba(0,0,0,.2); }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <span class="r"></span><span class="g"></span><span class="e"></span><span class="r"></span><span class="g"></span><span class="e"></span>
+  <span class="r"></span><span class="g"></span><span class="e"></span><span class="r"></span><span class="g"></span><span class="e"></span>
+  <span class="r"></span><span class="g"></span><span class="e"></span><span class="r"></span><span class="g"></span><span class="e"></span>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <img src="assets/rastafari-logo.png" alt="Rastafari Wellness logo" onerror="this.style.display='none'">
+      <span>Rastafari Wellness</span>
+    </a>
+    <nav class="primary">
+      <a class="active" href="#">Home</a>
+      <a href="#physicians">Why Order From Us</a>
+      <a href="#shop">Shop</a>
+      <a href="#journal">Journal</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary" href="#shop">Begin Your Consult</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#">Home</a><a href="#physicians">Why Order From Us</a><a href="#shop">Shop</a>
+    <a href="#journal">Journal</a><a href="#contact">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Doctor-Guided · Ayurvedic Wellness</span>
+      <h1>Calm that comes with <em>a prescription.</em></h1>
+      <p class="lede">Premium Vijaya Gummies and Full Spectrum Vijaya Oil, rooted in traditional Ayurveda and crafted for stress management, relaxation, and sleep wellness — through doctor-guided, prescription-based formulations.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#shop">Begin Your Consult</a>
+        <a class="btn btn-ghost" href="#physicians">Meet Our Doctors</a>
+      </div>
+    </div>
+    <div class="plate-frame">
+      <div class="cap"><span>Featured</span><span>Jamun Relax &amp; Reset</span></div>
+      <div class="plate-circle" style="border-radius:0; border:none; padding:0;">
+        <img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/07/jamun-2-scaled.png" alt="Jamun Relax &amp; Reset Gummies" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 260 260%22%3E%3Crect width=%22260%22 height=%22260%22 fill=%22%23EAE0C8%22/%3E%3C/svg%3E'" style="max-width:80%;">
+      </div>
+      <div class="plate-caption">Doctor-guided Vijaya gummies, crafted for calm and better sleep.</div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="wrap">
+    <div class="stat"><b>4.8/5</b><span>Customer Rating</span></div>
+    <div class="stat"><b>5,000+</b><span>Customers Served</span></div>
+    <div class="stat"><b>6</b><span>Licensed Physicians</span></div>
+    <div class="stat"><b>100%</b><span>Doctor-Reviewed</span></div>
+    <div class="stat"><b>Pan-India</b><span>Discreet Delivery</span></div>
+  </div>
+</div>
+
+<section class="physicians" id="physicians">
+  <div class="wrap">
+    <span class="eyebrow">Why Order From Us</span>
+    <div class="section-head">
+      <h2>Doctor-Guided Wellness</h2>
+      <p>Meet the physicians who review every order before it ships.</p>
+    </div>
+    <div class="license-line">AYUSH LICENSE NO. 25D5596</div>
+    <div class="doctor-grid">
+      <div class="doctor-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/02/Dr-Sankalp-150x150.jpg" alt="Dr. Sankalp Khullar" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23342F22%22/%3E%3C/svg%3E'"><b>Dr. Sankalp Khullar</b><span class="rx">Physician</span></div>
+      <div class="doctor-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/02/dr-sayali-150x150.jpg" alt="Dr. Sayli Hedau" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23342F22%22/%3E%3C/svg%3E'"><b>Dr. Sayli Hedau</b><span class="rx">Physician</span></div>
+      <div class="doctor-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/02/dr-adesh-150x150.jpg" alt="Dr. Aadesh C" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23342F22%22/%3E%3C/svg%3E'"><b>Dr. Aadesh C</b><span class="rx">Physician</span></div>
+      <div class="doctor-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/02/Dr-Shruti-150x150.jpg" alt="Dr. Shruthi S" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23342F22%22/%3E%3C/svg%3E'"><b>Dr. Shruthi S</b><span class="rx">Physician</span></div>
+      <div class="doctor-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/06/Dr-Disha-Patilnew-150x150.png" alt="Dr. Disha Patil" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23342F22%22/%3E%3C/svg%3E'"><b>Dr. Disha Patil</b><span class="rx">Physician</span></div>
+      <div class="doctor-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/06/dr-shashvati-150x150.png" alt="Dr. Shashvati" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23342F22%22/%3E%3C/svg%3E'"><b>Dr. Shashvati</b><span class="rx">Physician</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="materia" id="shop">
+  <div class="wrap">
+    <span class="eyebrow">Shop</span>
+    <div class="section-head">
+      <h2>Featured Product</h2>
+      <p>Discover our collection of remedies designed to support your daily wellness journey.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="plate"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/07/jamun-2-scaled.png" alt="Jamun Relax &amp; Reset Gummies" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23F3ECDD%22/%3E%3C/svg%3E'"></div>
+        <div class="info">
+          <h4>Jamun Relax &amp; Reset</h4>
+          <div class="dose-row"><span class="dose-dots"><span class="on"></span><span></span><span></span></span><span class="dose-label">Pack of 10</span></div>
+          <div class="price-row"><span>₹899</span><span class="add">Add →</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="plate"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/04/strawberry_new.png" alt="Strawberry Gummies" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23F3ECDD%22/%3E%3C/svg%3E'"></div>
+        <div class="info">
+          <h4>Strawberry, 5%</h4>
+          <div class="dose-row"><span class="dose-dots"><span class="on"></span><span class="on"></span><span></span></span><span class="dose-label">Classic</span></div>
+          <div class="price-row"><span>From ₹749</span><span class="add">Choose →</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="plate"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/04/mango_new.png" alt="Mango Gummies" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23F3ECDD%22/%3E%3C/svg%3E'"></div>
+        <div class="info">
+          <h4>Mango, 5%</h4>
+          <div class="dose-row"><span class="dose-dots"><span class="on"></span><span class="on"></span><span></span></span><span class="dose-label">Classic</span></div>
+          <div class="price-row"><span>From ₹749</span><span class="add">Choose →</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="plate"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2026/05/new-updated-design-4500mg.jpg-300x300.jpeg" alt="Full Spectrum Vijaya Oil 4500mg" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23F3ECDD%22/%3E%3C/svg%3E'"></div>
+        <div class="info">
+          <h4>Full Spectrum Oil, 4500mg</h4>
+          <div class="dose-row"><span class="dose-dots"><span class="on"></span><span class="on"></span><span class="on"></span></span><span class="dose-label">Peppermint</span></div>
+          <div class="price-row"><span>₹1,899</span><span class="add">Add →</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="legality">
+  <div class="wrap">
+    <span class="eyebrow">Please Read Before Ordering</span>
+    <div class="legality-box" style="margin-top:16px;">
+      <h3>A note on how these products are sold</h3>
+      <p>Rastafari products are formulated with legally permitted proportions of Vijaya oil infused full spectrum, and are intended for responsible use — not recreational consumption. Purchases for pain relief or psychological wellness may require a doctor's prescription. Please consult a licensed medical professional before use, especially if you have pre-existing conditions or are on medication. Not intended to diagnose, treat, cure, or prevent any disease. Keep out of reach of children.</p>
+      <span class="license-tag">✓ AYUSH License No. 25D5596</span>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How It Works</span>
+      <h2>The method, step by step</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step"><span class="num mono">01</span><h4>Place Your Order</h4><p>Choose your product and complete checkout in a few simple steps — your request is instantly confirmed.</p></div>
+      <div class="step"><span class="num mono">02</span><h4>Doctor Connect &amp; Approval</h4><p>A certified doctor reaches out briefly to understand your needs and ensure everything is right for you before approving your prescription.</p></div>
+      <div class="step"><span class="num mono">03</span><h4>Shipping at Your Doorstep</h4><p>Orders are processed and dispatched once the prescription is approved.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="journal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Blog</span>
+      <h2>Blog Topics</h2>
+    </div>
+    <div class="journal-grid">
+      <div class="journal-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2025/12/rastafari-gummies-benefits-usage-guide.png" alt="Daily wellness ritual guide" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 190%22%3E%3Crect width=%22300%22 height=%22190%22 fill=%22%23EAE0C8%22/%3E%3C/svg%3E'"><div class="body"><h4>A daily ritual for calm, balance, and better sleep</h4><span class="read">Read entry →</span></div></div>
+      <div class="journal-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2025/12/What-is-Vijaya-and-its-benefits-1.png" alt="What is Vijaya explainer" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 190%22%3E%3Crect width=%22300%22 height=%22190%22 fill=%22%23EAE0C8%22/%3E%3C/svg%3E'"><div class="body"><h4>What Vijaya is, and where it sits in Ayurveda</h4><span class="read">Read entry →</span></div></div>
+      <div class="journal-card"><img src="https://dev.rastafariwellness.com/wp-content/uploads/2025/12/Rastafari-gummies-and-wellness-science.png" alt="Science behind the gummies" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 190%22%3E%3Crect width=%22300%22 height=%22190%22 fill=%22%23EAE0C8%22/%3E%3C/svg%3E'"><div class="body"><h4>The science behind a broad-spectrum gummy</h4><span class="read">Read entry →</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="#" style="display:flex;align-items:center;gap:10px;">
+        <img src="assets/rastafari-logo.png" alt="" style="width:30px;height:30px;border-radius:50%;" onerror="this.style.display='none'">
+        <span class="brand-name" style="font-size:16px;">Rastafari Wellness</span>
+      </a>
+      <p class="tag">Rooted in traditional Ayurveda, crafted for stress management, relaxation, and sleep wellness — through doctor-guided, prescription-based formulations.</p>
+      <div class="stamp" style="margin-top:18px;"><b>AYUSH</b>LICENSED<span>No. 25D5596</span></div>
+    </div>
+    <div><h5>Quick Links</h5><ul><li><a href="#">About</a></li><li><a href="#physicians">Why Order From Us</a></li><li><a href="#contact">Contact</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
+    <div><h5>The Catalogue</h5><ul><li><a href="#shop">Gummies</a></li><li><a href="#shop">Full Spectrum Oil</a></li><li><a href="#journal">Journal</a></li></ul></div>
+    <div><h5>Reach Us</h5><ul><li>Mon–Sat, 10:00 AM – 6:00 PM</li><li>WhatsApp: 10 AM – 7 PM</li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Avaraj BPO &amp; Marketing Pvt. Ltd</span><span>Pharmacopoeia direction — Homepage, brand-bridged</span></div>
+</footer>
+
+<a class="whatsapp-fab" href="#" aria-label="Chat on WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.6 14.3c-.2.6-1.3 1.2-1.8 1.3-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.4.8-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.4.6c-.1.2-.2.3-.1.5.2.4.9 1.4 1.9 2.2 1.3 1 2.3 1.3 2.6 1.5.3.1.5.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.4 0 .2 0 .8-.2 1.4Z"/></svg>
+</a>
+
+<script>
+  var toggle = document.getElementById('mobileToggle');
+  var panel = document.getElementById('mobilePanel');
+  toggle.addEventListener('click', function(){ panel.classList.toggle('open'); });
+  panel.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ panel.classList.remove('open'); });
+  });
+</script>
+
+</body>
+</html>
